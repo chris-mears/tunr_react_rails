@@ -1,13 +1,21 @@
-import React from 'react';
+import React, { Component } from 'react';
 
-const componentName = (props) => {
-    return (
-        <div>
-            <h4>{props.song.title}</h4>
-            <h5>{props.song.album}</h5>
-            <audio controls src={props.song.preview_url}></audio>
+class Songs extends Component {
+    state = {
+        togglePreview: false
+    }
+
+    handleToggle = () => {
+        this.setState({togglePreview: !this.state.togglePreview})
+    }
+    render() {
+        return (
+            <div>
+            <h4 onClick={this.handleToggle}>{this.props.song.title}</h4>
+            {this.state.togglePreview ? <audio controls src={this.props.song.preview_url}></audio> : ''}
         </div>
-    );
-};
+        );
+    }
+}
 
-export default componentName;
+export default Songs;
