@@ -10,7 +10,7 @@ class Api::SongsController < ApplicationController
 
     @artist.songs << @song
     @artist.save!
-    render status: :ok
+    render json: @song
   end
 
   def show
