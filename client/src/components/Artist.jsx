@@ -17,17 +17,20 @@ const HeroImage = styled.div `
 
 class Artist extends Component {
     state = {
-        artist: {},
-        songs: []
+        artist: {
+            name: '',
+            ntionality: '',
+            photo_url: '',
+            songs: []
+        },
     }
 
     async componentWillMount() {
         try {
             const id = this.props.match.params.artist_id
             const response = await axios.get(`/api/artists/${id}`)
-            const artist = response.data.artist
-            const songs = response.data.songs 
-            this.setState({artist, songs})
+            const artist = response.data
+            this.setState({artist})
         } catch(error) {
             console.log(error)
         }
@@ -41,7 +44,7 @@ class Artist extends Component {
                 </HeroImage>
                 <h1>{this.state.artist.name}</h1>
                 <h5>Nationality: {this.state.artist.nationality}</h5>
-                <SongList songs={this.state.songs} />
+                <SongList songs={this.state.artist.songs} />
             </div>
         );
     }

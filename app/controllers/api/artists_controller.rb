@@ -11,11 +11,13 @@ class Api::ArtistsController < ApplicationController
 
   def show
     @artist = Artist.find(params[:id])
-    @songs = @artist.songs
-    render json: {
-             artist: @artist,
-             songs: @songs
-           }
+    render json: @artist, include: [:songs]
+    # @artist = Artist.find(params[:id])
+    # @songs = @artist.songs
+    # render json: {
+    #          artist: @artist,
+    #          songs: @songs
+    #        }
   end
 
   def update
