@@ -1,6 +1,19 @@
 import React, { Component } from 'react';
 import axios from 'axios'
+import styled from 'styled-components';
 import SongList from './SongList'
+
+const HeroImage = styled.div `
+    width: 100%;
+
+    img {
+        width: 80%;
+        height: 600px;
+        object-fit: cover;
+        object-position: 0 0;
+    }
+`
+
 
 class Artist extends Component {
     state = {
@@ -23,9 +36,11 @@ class Artist extends Component {
     render() {
         return (
             <div>
+                <HeroImage>
+                <img src={this.state.artist.photo_url} alt={this.state.artist.name} />
+                </HeroImage>
                 <h1>{this.state.artist.name}</h1>
                 <h5>Nationality: {this.state.artist.nationality}</h5>
-                <img src={this.state.artist.photo_url} alt={this.state.artist.name} />
                 <SongList songs={this.state.songs} />
             </div>
         );
